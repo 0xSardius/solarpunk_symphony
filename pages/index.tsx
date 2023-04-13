@@ -1,54 +1,29 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
+import { ConnectWallet, useContract, useMetadata } from "@thirdweb-dev/react";
 import type { NextPage } from "next";
-import styles from "../styles/Home.module.css";
+// import styles from "../styles/Home.module.css";
+import { Container, Flex, Box, SimpleGrid, Text } from "@chakra-ui/react";
 
 const Home: NextPage = () => {
+  const contractAddress = "0xbC1dE8684e47aBc14eeD008ec1f9C54b600bCec7";
+  const { contract } = useContract(contractAddress);
+  const {data: metadata, isLoading: isLoadingMetadata} = useMetadata(contract);
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="http://thirdweb.com/">thirdweb</a>!
-        </h1>
-
-        <p className={styles.description}>
-          Get started by configuring your desired network in{" "}
-          <code className={styles.code}>pages/_app.tsx</code>, then modify the{" "}
-          <code className={styles.code}>pages/index.tsx</code> file!
-        </p>
-
-        <div className={styles.connect}>
-          <ConnectWallet />
-        </div>
-
-        <div className={styles.grid}>
-          <a href="https://portal.thirdweb.com/" className={styles.card}>
-            <h2>Portal &rarr;</h2>
-            <p>
-              Guides, references and resources that will help you build with
-              thirdweb.
-            </p>
-          </a>
-
-          <a href="https://thirdweb.com/dashboard" className={styles.card}>
-            <h2>Dashboard &rarr;</h2>
-            <p>
-              Deploy, configure and manage your smart contracts from the
-              dashboard.
-            </p>
-          </a>
-
-          <a
-            href="https://portal.thirdweb.com/templates"
-            className={styles.card}
-          >
-            <h2>Templates &rarr;</h2>
-            <p>
-              Discover and clone template projects showcasing thirdweb features.
-            </p>
-          </a>
-        </div>
-      </main>
-    </div>
+    <>
+    <Container>
+      <Flex p={"20px"} justifyContent={"space-between"}>
+        <Box></Box>
+        <ConnectWallet />
+      </Flex>
+      <Flex h={"90vh"} alignItems={"center"} justifyContent={"center"}>
+        <SimpleGrid columns={2} spacing={10}>
+          <Box></Box>
+          <Flex>
+            <Text>NFT Project</Text>
+          </Flex>
+          </SimpleGrid>
+      </Flex>
+    </Container>
+    </>
   );
 };
 
